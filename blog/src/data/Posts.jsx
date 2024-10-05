@@ -2,6 +2,8 @@ import { useState } from "react"
 
 // /src/data/posts.js
 export const Posts = () => {
+    const [post,setPost] = useState();
+    const [list, setList] = useState(["aaa", "bbbb"]);
     const [postItem,setPostItem] = useState([
   {
     id: 1,
@@ -32,15 +34,31 @@ export const Posts = () => {
   },
 ])
 
-const aaa = () => {
-    console.log("aa");
-}
-
-aaa();
-
 return (
     <>
-    <p>あああ</p>
+    <div>
+      {postItem.map((post)=> {
+        return (
+          <>
+          <div class="post-list">
+          <div class="post-item">
+          <div class="post-list-info">
+            <div className="post-list-date" key={post.createdAt}>{post.createdAt}</div>
+            <div className="post-list-category" key={post.categories}>{post.categories}</div>
+          </div>
+          <div class="post-list-title">
+            <div key={post.title}>{post.title}</div>
+          </div>
+          <div class="post-list-content">
+            <div key={post.content}>{post.content}</div>
+          </div>
+            </div>
+            </div>
+          </>
+        )
+      })}
+    </div>
+
     </>
 );
 

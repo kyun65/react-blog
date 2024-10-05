@@ -1,3 +1,36 @@
+.post-list {
+  width: 800px;
+  margin: 0 auto;
+}
+.post-list-info {
+  display: flex;
+  justify-content: space-between;
+}
+.post-list-category {
+  border: 1px solid #06c;
+  border-radius: 0.2rem;
+  color: #06c;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+  padding: 0.2rem 0.4rem;
+}
+.post-item {
+  border: 1px solid #ccc;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+.post-list-title {
+  font-weight: bold;
+  text-align: left;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+.post-list-content {
+  font-size: 12px;
+  text-align: left;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
