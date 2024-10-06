@@ -39,22 +39,20 @@ return (
     <div>
       {postItem.map((post)=> {
         return (
-          <>
-          <div class="post-list">
-          <div class="post-item">
-          <div class="post-list-info">
-            <div className="post-list-date" key={post.createdAt}>{post.createdAt}</div>
-            <div className="post-list-category" key={post.categories}>{post.categories}</div>
-          </div>
-          <div class="post-list-title">
-            <div key={post.title}>{post.title}</div>
-          </div>
-          <div class="post-list-content">
-            <div key={post.content}>{post.content}</div>
-          </div>
+          <div className={post-list} key={post.id}>
+            <div className={post-item}>
+              <div className={post-list-info}>
+                <div className={post-list-date} key={post.createdAt}>{post.createdAt}</div>
+                <div className={post-list-category}  dangerouslySetInnerHTML={{ __html: post.categories }} />
+              </div>
+              <div class="post-list-title">
+                <div dangerouslySetInnerHTML={{ __html: post.title }} />
+              </div>
+              <div class="post-list-content">
+                <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              </div>
             </div>
-            </div>
-          </>
+          </div>
         )
       })}
     </div>
