@@ -1,9 +1,9 @@
 import { useState } from "react"
+import styles from '../index.module.css'
 
 // /src/data/posts.js
 export const Posts = () => {
     const [post,setPost] = useState();
-    const [list, setList] = useState(["aaa", "bbbb"]);
     const [postItem,setPostItem] = useState([
   {
     id: 1,
@@ -35,20 +35,20 @@ export const Posts = () => {
 ])
 
 return (
-    <>
+
     <div>
       {postItem.map((post)=> {
         return (
-          <div className={post-list} key={post.id}>
-            <div className={post-item}>
-              <div className={post-list-info}>
-                <div className={post-list-date} key={post.createdAt}>{post.createdAt}</div>
-                <div className={post-list-category}  dangerouslySetInnerHTML={{ __html: post.categories }} />
+          <div className={styles.post_list} key={post.id}>
+            <div className={styles.post_item}>
+              <div className={styles.post_list_info}>
+                <div className={styles.post_list_date} key={post.createdAt}>{post.createdAt.replace(/-/g, '/').slice( 0, 10 )}</div>
+                <div className={styles.post_list_category}  dangerouslySetInnerHTML={{ __html: post.categories }} />
               </div>
-              <div class="post-list-title">
+              <div className={styles.post_list_title}>
                 <div dangerouslySetInnerHTML={{ __html: post.title }} />
               </div>
-              <div class="post-list-content">
+              <div className={styles.post_list_content}>
                 <div dangerouslySetInnerHTML={{ __html: post.content }} />
               </div>
             </div>
@@ -57,7 +57,7 @@ return (
       })}
     </div>
 
-    </>
+
 );
 
 }
