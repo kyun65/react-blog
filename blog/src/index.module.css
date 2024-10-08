@@ -1,12 +1,12 @@
-.post-list {
+.post_list {
   width: 800px;
   margin: 0 auto;
 }
-.post-list-info {
+.post_list_info {
   display: flex;
   justify-content: space-between;
 }
-.post-list-category {
+.post_list_category {
   border: 1px solid #06c;
   border-radius: 0.2rem;
   color: #06c;
@@ -14,20 +14,20 @@
   margin-right: 0.5rem;
   padding: 0.2rem 0.4rem;
 }
-.post-item {
+.post_item {
   border: 1px solid #ccc;
   margin-bottom: 2rem;
   padding: 1rem;
 }
 
-.post-list-title {
+.post_list_title {
   font-weight: bold;
   text-align: left;
   font-size: 1.5rem;
   margin-bottom: 1rem;
   margin-top: 0.5rem;
 }
-.post-list-content {
+.post_list_content {
   font-size: 12px;
   text-align: left;
 }
@@ -70,7 +70,7 @@
   padding: 2em;
 }
 
-.read-the-docs {
+.read_the_docs {
   color: #888;
 }
 

@@ -1,10 +1,8 @@
 import { useState } from "react"
+import styles from '../index.module.css'
 
-// /src/data/posts.js
-export const Posts = () => {
-    const [post,setPost] = useState();
-    const [list, setList] = useState(["aaa", "bbbb"]);
-    const [postItem,setPostItem] = useState([
+
+const postItem = [
   {
     id: 1,
     title: '記事タイトル１',
@@ -32,34 +30,45 @@ export const Posts = () => {
     content: `
     本文です。本文です。本文です。本文です。本文です。本文です。<br/>本文です。本文です。本文です。本文です。本文です。<br/><br/>本文です。本文です。本文です。本文です。本文です。本文です。本文です。本文です。本文です。<br/><br/><br/>本文です。本文です。本文です。本文です。本文です。本文です。<br/>`,
   },
-])
+]
+
+// /src/data/posts.js
+export const Posts = () => {
+
+
+
+
 
 return (
-    <>
+
     <div>
       {postItem.map((post)=> {
         return (
-          <>
-          <div class="post-list">
-          <div class="post-item">
-          <div class="post-list-info">
-            <div className="post-list-date" key={post.createdAt}>{post.createdAt}</div>
-            <div className="post-list-category" key={post.categories}>{post.categories}</div>
-          </div>
-          <div class="post-list-title">
-            <div key={post.title}>{post.title}</div>
-          </div>
-          <div class="post-list-content">
-            <div key={post.content}>{post.content}</div>
-          </div>
+          <div className={styles.post_list} key={post.id}>
+            <div className={styles.post_item}>
+              <div className={styles.post_list_info}>
+                <div className={styles.post_list_date} key={post.createdAt}>{post.createdAt.replace(/-/g, '/').slice( 0, 10 )}</div>
+                {post.categories.map((categorie)=>{
+                  return (
+                    <div className={styles.post_list_category}>
+                      {categorie}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className={styles.post_list_title}>
+                <div>{post.title}</div>
+              </div>
+              <div className={styles.post_list_content}>
+                <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              </div>
             </div>
-            </div>
-          </>
+          </div>
         )
       })}
     </div>
 
-    </>
+
 );
 
 }
