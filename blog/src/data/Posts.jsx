@@ -1,10 +1,8 @@
 import { useState } from "react"
 import styles from '../index.module.css'
 
-// /src/data/posts.js
-export const Posts = () => {
-    const [post,setPost] = useState();
-    const [postItem,setPostItem] = useState([
+
+const postItem = [
   {
     id: 1,
     title: '記事タイトル１',
@@ -32,7 +30,14 @@ export const Posts = () => {
     content: `
     本文です。本文です。本文です。本文です。本文です。本文です。<br/>本文です。本文です。本文です。本文です。本文です。<br/><br/>本文です。本文です。本文です。本文です。本文です。本文です。本文です。本文です。本文です。<br/><br/><br/>本文です。本文です。本文です。本文です。本文です。本文です。<br/>`,
   },
-])
+]
+
+// /src/data/posts.js
+export const Posts = () => {
+
+
+
+
 
 return (
 
@@ -43,10 +48,16 @@ return (
             <div className={styles.post_item}>
               <div className={styles.post_list_info}>
                 <div className={styles.post_list_date} key={post.createdAt}>{post.createdAt.replace(/-/g, '/').slice( 0, 10 )}</div>
-                <div className={styles.post_list_category}  dangerouslySetInnerHTML={{ __html: post.categories }} />
+                {post.categories.map((categorie)=>{
+                  return (
+                    <div className={styles.post_list_category}>
+                      {categorie}
+                    </div>
+                  );
+                })}
               </div>
               <div className={styles.post_list_title}>
-                <div dangerouslySetInnerHTML={{ __html: post.title }} />
+                <div>{post.title}</div>
               </div>
               <div className={styles.post_list_content}>
                 <div dangerouslySetInnerHTML={{ __html: post.content }} />
