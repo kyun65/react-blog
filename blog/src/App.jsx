@@ -3,49 +3,21 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Posts } from "./data/Posts";
 import { Routes, Route, Link, NavLink } from 'react-router-dom';
-import Home from './data/Home';
-import About from './data/About';
-import Contact from './data/Contact';
-import NoMatch from './data/nomatch';
+import Post from './data/Post';
 
 
 
 function App() {
-//   const [count, setCount] = useState(0)
 
-//   return (
-//     <>
-// <Posts />
-//     </>
-//   )
 return (
+  <>
+    <Routes>
+      <Route path="/" element={<Posts />} />
+      <Route path=":id" element={<Post />} />
 
-  <div className="App">
-      <h1>Hello React Router v6</h1>
+    </Routes>
 
-
-
-
-      <ul>
-        <li>
-        <NavLink style={({ isActive }) => (isActive ? { color: 'blue' } : undefined)} to="/">Home</NavLink>
-        </li>
-        <li>
-        <NavLink className={({ isActive }) => (isActive ? 'active' : undefined)} to="/about">About</NavLink>
-        </li>
-        <li>
-        <NavLink className={({ isActive }) => (isActive ? 'active' : undefined)} to="/contact">Contact</NavLink>
-        </li>
-      </ul>
-
-
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/contact" element={<Contact message="Hello Contact" />} />
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
-    </div>
+  </>
   );
 
 }

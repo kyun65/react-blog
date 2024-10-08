@@ -1,8 +1,4 @@
-import { useState } from "react"
-import styles from '../index.module.css'
-import { Link } from "react-router-dom";
-
-
+import { useParams } from "react-router-dom";
 
 const postItem = [
   {
@@ -34,47 +30,27 @@ const postItem = [
   },
 ]
 
-// /src/data/posts.js
-export const Posts = () => {
+export default function Post() {
+  const { id } = useParams(); // 分割代入
+  console.log(id);
+
+  const showPost = postItem.find((post)=>{ //findでurlと等しいものを探す
+    const numberId = Number(id);
+    return (
+      numberId === post.id //配列と等しい場合
+    );
+
+  });
+
+  console.log(showPost);
 
 
-
-
-
-return (
-
+  return (
     <div>
-      {postItem.map((post)=> {
-        return (
-          <>
-          <div className={styles.post_list} key={post.id}>
-            <div className={styles.post_item}>
-            <Link to={post.id} >
-              <div className={styles.post_list_info}>
-                <div className={styles.post_list_date} key={post.createdAt}>{post.createdAt.replace(/-/g, '/').slice( 0, 10 )}</div>
-                {post.categories.map((categorie)=>{
-                  return (
-                    <div className={styles.post_list_category}>
-                      {categorie}
-                    </div>
-                  );
-                })}
-              </div>
-              <div className={styles.post_list_title}>
-                <div>{post.title}</div>
-              </div>
-              <div className={styles.post_list_content}>
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              </div>
-              </Link>
-            </div>
-          </div>
-          </>
-        )
-      })}
+      <img src={showPost.thumbnailUrl} alt="" />
+      <div>{showPost.title}</div>
+      <div>{showPost.content}</div>
+      <p></p>
     </div>
-
-
-);
-
+  );
 }
