@@ -1,14 +1,19 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import { Posts } from "./data/Posts";
+import { Posts } from "./components/Posts";
+import { Routes,Route, useParams } from "react-router-dom";
+import { Post } from './components/Post';
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-<Posts />
+    <Routes>
+      <Route path="/" element={<Posts />}/>
+      <Route path=":id" element={<Post />}/>
+    </Routes>
     </>
   )
 }

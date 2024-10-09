@@ -1,8 +1,4 @@
-import { useState } from "react"
-import styles from '../index.module.css'
-
-
-const postItem = [
+export const PostItem = [
   {
     id: 1,
     title: '記事タイトル１',
@@ -31,44 +27,3 @@ const postItem = [
     本文です。本文です。本文です。本文です。本文です。本文です。<br/>本文です。本文です。本文です。本文です。本文です。<br/><br/>本文です。本文です。本文です。本文です。本文です。本文です。本文です。本文です。本文です。<br/><br/><br/>本文です。本文です。本文です。本文です。本文です。本文です。<br/>`,
   },
 ]
-
-// /src/data/posts.js
-export const Posts = () => {
-
-
-
-
-
-return (
-
-    <div>
-      {postItem.map((post)=> {
-        return (
-          <div className={styles.post_list} key={post.id}>
-            <div className={styles.post_item}>
-              <div className={styles.post_list_info}>
-                <div className={styles.post_list_date} key={post.createdAt}>{post.createdAt.replace(/-/g, '/').slice( 0, 10 )}</div>
-                {post.categories.map((categorie)=>{
-                  return (
-                    <div className={styles.post_list_category}>
-                      {categorie}
-                    </div>
-                  );
-                })}
-              </div>
-              <div className={styles.post_list_title}>
-                <div>{post.title}</div>
-              </div>
-              <div className={styles.post_list_content}>
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              </div>
-            </div>
-          </div>
-        )
-      })}
-    </div>
-
-
-);
-
-}
