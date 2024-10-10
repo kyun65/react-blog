@@ -1,6 +1,6 @@
 import { useState } from "react"
 import styles from '../index.module.css'
-import { PostItem } from "../data/Post-data";
+import { postItems } from "../data/Post-data";
 import { Link } from "react-router-dom";
 
 
@@ -11,7 +11,7 @@ export const Posts = () => {
 return (
 
     <div>
-      {PostItem.map((post)=> {
+      {postItems.map((post)=> {
         return (
           <div className={styles.post_list} key={post.id}>
             <div className={styles.post_item}>

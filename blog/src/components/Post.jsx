@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { PostItem } from "../data/Post-data";
+import { postItems } from "../data/Post-data";
 import styles from '../index.module.css'
 
 export const Post = () => {
@@ -7,11 +7,13 @@ export const Post = () => {
 const { id } = useParams(); //分割代入
 console.log(id)
 
-const showPost = PostItem.find((post)=>{
+const showPost = postItems.find((post)=>{
   const numberId = Number(id);
   return (numberId === post.id);
 
 });
+
+if (!showPost) return <div>記事が見つかりませんでした</div>
 
 return (
   <>
@@ -31,7 +33,6 @@ return (
     <p className={styles.detail_content} dangerouslySetInnerHTML={{ __html: showPost.content }} />
     </div>
   </>
-
 
 )
 
