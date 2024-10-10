@@ -1,4 +1,4 @@
-export const PostItem = [
+export const postItems = [
   {
     id: 1,
     title: '記事タイトル１',
