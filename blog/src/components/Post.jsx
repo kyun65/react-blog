@@ -33,7 +33,6 @@ return (
     <p className={styles.detail_content} dangerouslySetInnerHTML={{ __html: showPost.content }} />
     </div>
   </>
-
 )
 
 }

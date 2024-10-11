@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 
 export const Posts = () => {
 
-
-
   const [posts, setPosts] = useState([])
   useEffect(() => {
     const fetcher = async () => {
@@ -17,9 +15,6 @@ export const Posts = () => {
 
     fetcher()
   }, [])
-
-
-
 
 
 return (
