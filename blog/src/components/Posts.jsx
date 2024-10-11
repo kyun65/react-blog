@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import styles from '../index.module.css'
-import { postItems } from "../data/Post-data";
+// import { postItems } from "../data/Post-data";
 import { Link } from "react-router-dom";
 
 
@@ -17,6 +17,7 @@ export const Posts = () => {
       const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts")
       const data = await res.json()
       setPosts(data.posts)
+      console.log(data)
     }
 
     fetcher()
@@ -38,7 +39,7 @@ return (
                 <div className={styles.post_list_date} key={post.createdAt}>{post.createdAt.replace(/-/g, '/').slice( 0, 10 )}</div>
                 {post.categories.map((categorie)=>{
                   return (
-                    <div className={styles.post_list_category}>
+                    <div className={styles.post_list_category} key={post.category}>
                       {categorie}
                     </div>
                   );
