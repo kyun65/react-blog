@@ -1,14 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Posts } from "./data/Posts";
+
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
+import { Posts } from "./components/Posts";
+import { Post } from "./components/Post";
+import { Routes,Route} from "react-router-dom"
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
-<Posts />
+
+
+        <Routes>
+        <Route path="/" element={<Posts />} />
+        <Route path=":id" element={<Post />} />
+    </Routes>
+
     </>
   )
 }
