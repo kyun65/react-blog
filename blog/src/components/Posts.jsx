@@ -1,4 +1,3 @@
-import { useState } from "react"
 import styles from '../index.module.css'
 import { postItems } from "../data/Post-data";
 import { Link } from "react-router-dom";
@@ -20,7 +19,7 @@ return (
                 <div className={styles.post_list_date} key={post.createdAt}>{post.createdAt.replace(/-/g, '/').slice( 0, 10 )}</div>
                 {post.categories.map((categorie)=>{
                   return (
-                    <div className={styles.post_list_category}>
+                    <div className={styles.post_list_category} key={categorie}>
                       {categorie}
                     </div>
                   );

@@ -25,7 +25,7 @@ return (
     <div className={styles.detail_cat_wrap}>
     {showPost.categories.map((categorie)=>{
       return(
-        <div className={styles.detail_cat}>{categorie}</div>
+        <div className={styles.detail_cat} key={categorie}>{categorie}</div>
       )
     })}
     </div>
