@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { postItems } from "../data/Post-data";
+import { useState,useEffect } from "react";
+// import { postItems } from "../data/Post-data";
 import styles from '../index.module.css'
 
 export const Post = () => {
@@ -7,13 +8,28 @@ export const Post = () => {
 const { id } = useParams(); //分割代入
 console.log(id)
 
-const showPost = postItems.find((post)=>{
+const [posts, setPosts] = useState([])
+useEffect(() => {
+  const fetcher = async () => {
+    const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts{id}")
+    const data = await res.json()
+    setPosts(data.posts)
+    console.log(data)
+  }
+
+  fetcher()
+}, [])
+
+
+const showPost = posts.find((post)=>{
   const numberId = Number(id);
   return (numberId === post.id);
 
 });
 
-if (!showPost) return <div>記事が見つかりませんでした</div>
+
+
+
 
 return (
   <>
