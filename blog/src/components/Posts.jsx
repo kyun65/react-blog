@@ -5,16 +5,29 @@ import { Link } from "react-router-dom";
 export const Posts = () => {
 
   const [posts, setPosts] = useState([])
+  const [isLoading, setIsLoading] = useState();
   useEffect(() => {
     const fetcher = async () => {
+
+      try {
       const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts")
       const data = await res.json()
       setPosts(data.posts)
       console.log(data)
+    } finally {
+      setIsLoading(false);
     }
+  }
 
     fetcher()
   }, [])
+
+  if (isLoading) {
+    return <div>読み込み中</div>;
+  } else if (!posts) {
+    return <div>記事が見つかりませんでした。</div>;
+  }
+
 
 
 return (

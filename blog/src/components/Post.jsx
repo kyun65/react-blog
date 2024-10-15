@@ -6,22 +6,26 @@ export const Post = () => {
 
   const { id } = useParams(); //分割代入
   const [posts, setPosts] = useState(null);
+  const [isLoading, setIsLoading] = useState();
 
   useEffect(() => {
     const fetcher = async () => {
-      const res = await fetch(`https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`); //jsonを読み込む
-      const data = await res.json() //jsonをオブジェクトに変換
-      setPosts(data.post); //dataの中のpostを取得
-      console.log('出力',data);
-      console.log(res)
+      try {
+        const res = await fetch(`https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`); //jsonを読み込む
+        const data = await res.json() //jsonをオブジェクトに変換
+        setPosts(data.post); //dataの中のpostを取得
+        console.log('出力',data);
+        console.log(res)
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     fetcher()
   }, [id])
 
-
-
   if (!posts) return <div>記事が見つかりませんでした</div>
+
 
   return (
     <div className={styles.detail_container}>
