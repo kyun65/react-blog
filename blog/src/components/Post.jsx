@@ -8,7 +8,7 @@ export const Post = () => {
 const { id } = useParams(null); //分割代入
 console.log(id)
 
-const [isLoading, setIsLoading] = useState();
+const [isLoading, setIsLoading] = useState(true);
 const [posts, setPosts] = useState() //useState:コンポーネントにてstateを保持・更新させる
 
 // APIでpostsを取得する処理をuseEffectで実行します。

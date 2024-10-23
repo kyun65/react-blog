@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"; //react-router-domコンポーネント
 
 export const Posts = () => {
 
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]) //useState:コンポーネントにてstateを保持・更新させる
 
   // APIでpostsを取得する処理をuseEffectで実行します。
@@ -30,6 +30,11 @@ export const Posts = () => {
     return <p>Loading...</p>;
   } else if (!posts) return <div>記事が見つかりませんでした</div>
 
+  if (isLoading) {
+    return <div>読み込み中</div>;
+    } else if (!posts) {
+    return<div>記事が見つかりませんでした</div>;
+    }
 
 
 return (
