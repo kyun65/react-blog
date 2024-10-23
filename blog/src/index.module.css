@@ -125,3 +125,58 @@
   line-height: 1.7;
   font-size: 14px;
 }
+
+.header_app {
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  font-weight: 700;
+  justify-content: space-between;
+  padding: 24px;
+}
+.header_link {
+  color: #fff;
+  text-decoration: none;
+}
+.contact_form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 2.5rem;
+  padding-top: 2.5rem;
+}
+.contact_form_title {
+  font-weight: bold;
+}
+.contact_form_wrap dl {
+  display: flex;
+  justify-content: space-between;
+}
+
+dt {
+  width: 240px;
+}
+dd {
+  width: 100%;
+}
+dd input,
+dd textarea {
+  color: #333;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  outline: none;
+  border: solid #ccc 1px;
+}
+
+input {
+  font-feature-settings: inherit;
+  color: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  font-variation-settings: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
