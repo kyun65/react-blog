@@ -12,8 +12,8 @@ export const ContactPage = () => {
 
 
   // ステートの管理
-  const [ error,setError ] = useState({}); //Validationエラーメッセージを管理するためのステート
-  const [ submit,setSubmit ] = useState(false); //フォームの入力データを管理するためのステート
+  const [ error,setError ] = useState({}); //validateエラーメッセージを管理するためのステート
+  const [ isSubmitting,setSubmit ] = useState(false); //フォームの入力データを管理するためのステート
 
 
   const changeEvent = (event) => {
@@ -22,7 +22,7 @@ export const ContactPage = () => {
   } //フォームの入力が変更されたときに呼び出される
 
 
-  const validation = () => {
+  const validate = () => {
     const valueErrors = {};
     if (!contactData.name) valueErrors.name = 'お名前は必須です。';
     if (!contactData.email) valueErrors.email = 'メールアドレスは必須です。';
@@ -32,9 +32,9 @@ export const ContactPage = () => {
   } //フォームの入力データを検証(バリデーション)
 
 
-  const submitButton = async(event) => {
+  const submit = async(event) => {
     event.preventDefault();
-    if (!validation()) return;
+    if (!validate()) return;
     setSubmit(true);
     try {
       const response = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts", {
@@ -44,7 +44,7 @@ export const ContactPage = () => {
       });
       if (!response.ok) throw new Error('Network response was not ok');
       alert('送信しました');
-      setContactData({ name: '', email: '', message: '' });
+      handleClear();
       setError({});
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -66,7 +66,7 @@ export const ContactPage = () => {
         </header>
         <div className={styles.contact_form}>
           <h1 className={styles.contact_form_title}>問合わせフォーム</h1>
-          <form className={styles.contact_form_wrap} onSubmit={submitButton}>
+          <form className={styles.contact_form_wrap} onSubmit={submit}>
             <div className="formItem">
               <label>
                 <dl>
@@ -101,8 +101,8 @@ export const ContactPage = () => {
               </div>
             </div>
             <div className="btn">
-              <input type="submit" value="送信" disabled={submit} />
-              <input type="reset" value="クリア" onClick={handleClear} disabled={submit} />
+              <input type="submit" value="送信" disabled={isSubmitting} />
+              <input type="reset" value="クリア" onClick={handleClear} disabled={isSubmitting} />
             </div>
           </form>
         </div>
