@@ -1,12 +1,19 @@
-import { useState } from 'react'
+
 import { Posts } from "./components/Posts";
+import { Post } from "./components/Post";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
-<Posts />
+      <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Posts/>} />
+            <Route path=":id" element={<Post/>} />
+          </Routes>
+      </BrowserRouter>
     </>
   )
 }
