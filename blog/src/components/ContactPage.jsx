@@ -72,9 +72,9 @@ export const ContactPage = () => {
                 <dl>
                   <dt>お名前</dt>
                   <dd className="text">
-                    <input type="text" id="name" maxLength="30" value={contactData.name} onChange={changeEvent} disabled={submit} />
+                    <input type="text" id="name" value={contactData.name} onChange={changeEvent} disabled={submit} />
+                    {error.name && <span className={styles.error}>{error.name}</span>}
                   </dd>
-                  {error.name && <span>{error.name}</span>}
                 </dl>
               </label>
               <div className="label">
@@ -83,8 +83,8 @@ export const ContactPage = () => {
                     <dt>メールアドレス</dt>
                     <dd className="text">
                     <input type="text" id="email" onChange={changeEvent} />
+                    {error.email && <span className={styles.error}>{error.email}</span>}
                     </dd>
-                    {error.email && <span>{error.email}</span>}
                   </dl>
                 </label>
               </div>
@@ -93,9 +93,9 @@ export const ContactPage = () => {
                   <dl>
                     <dt>本文</dt>
                     <dd className="text">
-                      <textarea type="text" id="message" maxLength="500" rows="10" value={contactData.message} onChange={changeEvent} disabled={submit} />
+                      <textarea type="text" id="message" rows="10" value={contactData.message} onChange={changeEvent} disabled={submit} />
+                      {error.message && <span className={styles.error}>{error.message}</span>}
                     </dd>
-                    {error.message && <span>{error.message}</span>}
                   </dl>
                 </label>
               </div>

@@ -168,6 +168,10 @@ dd textarea {
   outline: none;
   border: solid #ccc 1px;
 }
+.error {
+  color: #f00;
+  display: block;
+}
 
 input {
   font-feature-settings: inherit;
