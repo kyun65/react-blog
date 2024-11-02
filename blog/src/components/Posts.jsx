@@ -13,7 +13,7 @@ export const Posts = () => {
   useEffect(() => {
     const fetcher = async () => {
       try {
-      const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts") //外部のjsonの読み込み
+      const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts", {method: "GET"}) //外部のjsonの読み込み
       const data = await res.json() //jsonをjsのオブジェクト形式に変換
       setPosts(data.posts) //dataの中からpostsの情報だけを抜き取る
       console.log('情報',data) //一旦dataの中身を確認する

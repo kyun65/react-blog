@@ -1,0 +1,122 @@
+import { Link } from "react-router-dom"; //react-router-domコンポーネントのリンク機能の呼び出し
+import styles from '../index.module.css'
+import { mailRegex } from "../constants/regex";
+import { useState } from "react";
+
+export const ContactPage = () => {
+
+  const [contactData,setContactData] = useState(
+    {name:'', email: '', message: ''}
+  ); //空文字のオブジェクトを入れる。入力されたデータを管理
+
+
+  // ステートの管理
+  const [ error,setError ] = useState({}); //validateエラーメッセージを管理するためのステート
+  const [ isSubmitting,setIsSubmitting ] = useState(false); //フォームの入力データを管理するためのステート
+
+
+  const changeEvent = (event) => {
+    const { id, value } = event.target;
+    setContactData((prevData) => ({ ...prevData, [id]: value }));
+  } //フォームの入力が変更されたときに呼び出される
+
+
+  const validate = () => {
+    const valueErrors = {};
+    if (!contactData.name) valueErrors.name = 'お名前は必須です。';
+    if (!contactData.email) valueErrors.email = 'メールアドレスは必須です。';
+    if (!contactData.message) valueErrors.message = '本文は必須です。';
+    if (contactData.name.length > 30) valueErrors.name = 'お名前は30文字以内で入力してください。';
+    if (!mailRegex.test(contactData.email)) valueErrors.email = 'メールアドレスの形式が正しくありません。';
+    console.log(mailRegex.test(contactData.email))
+    console.log(mailRegex)
+
+    if (contactData.message.length > 500) valueErrors.message = '本文は５００文字以内です。';
+
+    setError(valueErrors);
+    console.log(Object.keys(valueErrors))
+    return Object.keys(valueErrors).length === 0;
+  } //フォームの入力データを検証(バリデーション)
+
+  const submit = async(event) => {
+    event.preventDefault();
+    const isClear = validate()
+    if (!isClear) return;
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactData),
+      });
+      const data = await response.json()
+      console.log(data)
+      if (!response.ok) throw new Error('Network response was not ok');
+      alert('送信しました');
+      handleClear();
+      setError({});
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  const handleClear = () => {
+    setContactData({name: '', email: '', message: ''});
+  }
+
+  return (
+    <>
+      <div className='App'>
+        <header className={styles.header_app}>
+          <Link to="/" className={styles.header_link}>Blog</Link>
+          <Link to="/contact" className={styles.header_link}>お問い合わせ</Link>
+        </header>
+        <div className={styles.contact_form}>
+          <h1 className={styles.contact_form_title}>問合わせフォーム</h1>
+          <form className={styles.contact_form_wrap} onSubmit={submit}>
+            <div className="formItem">
+              <label>
+                <dl>
+                  <dt>お名前</dt>
+                  <dd className="text">
+                    <input type="text" id="name" value={contactData.name} onChange={changeEvent} disabled={submit} />
+                    {error.name && <span className={styles.error}>{error.name}</span>}
+                  </dd>
+                </dl>
+              </label>
+              <div className="label">
+                <label>
+                  <dl>
+                    <dt>メールアドレス</dt>
+                    <dd className="text">
+                    <input type="text" id="email" onChange={changeEvent} />
+                    {error.email && <span className={styles.error}>{error.email}</span>}
+                    </dd>
+                  </dl>
+                </label>
+              </div>
+              <div className="label">
+                <label>
+                  <dl>
+                    <dt>本文</dt>
+                    <dd className="text">
+                      <textarea type="text" id="message" rows="10" value={contactData.message} onChange={changeEvent} disabled={submit} />
+                      {error.message && <span className={styles.error}>{error.message}</span>}
+                    </dd>
+                  </dl>
+                </label>
+              </div>
+            </div>
+            <div className="btn">
+              <input type="submit" value="送信" disabled={isSubmitting} />
+              <input type="reset" value="クリア" onClick={handleClear} disabled={isSubmitting} />
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  )
+
+}
