@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom"; //react-router-domコンポーネントのリンク機能の呼び出し
 import styles from '../index.module.css'
+import { mailRegex } from "../constants/regex";
 import { useState } from "react";
-
-
 
 export const ContactPage = () => {
 
@@ -13,7 +12,7 @@ export const ContactPage = () => {
 
   // ステートの管理
   const [ error,setError ] = useState({}); //validateエラーメッセージを管理するためのステート
-  const [ isSubmitting,setSubmit ] = useState(false); //フォームの入力データを管理するためのステート
+  const [ isSubmitting,setIsSubmitting ] = useState(false); //フォームの入力データを管理するためのステート
 
 
   const changeEvent = (event) => {
@@ -27,21 +26,31 @@ export const ContactPage = () => {
     if (!contactData.name) valueErrors.name = 'お名前は必須です。';
     if (!contactData.email) valueErrors.email = 'メールアドレスは必須です。';
     if (!contactData.message) valueErrors.message = '本文は必須です。';
+    if (contactData.name.length > 30) valueErrors.name = 'お名前は30文字以内で入力してください。';
+    if (!mailRegex.test(contactData.email)) valueErrors.email = 'メールアドレスの形式が正しくありません。';
+    console.log(mailRegex.test(contactData.email))
+    console.log(mailRegex)
+
+    if (contactData.message.length > 500) valueErrors.message = '本文は５００文字以内です。';
+
     setError(valueErrors);
+    console.log(Object.keys(valueErrors))
     return Object.keys(valueErrors).length === 0;
   } //フォームの入力データを検証(バリデーション)
 
-
   const submit = async(event) => {
     event.preventDefault();
-    if (!validate()) return;
-    setSubmit(true);
+    const isClear = validate()
+    if (!isClear) return;
+    setIsSubmitting(true);
     try {
       const response = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(contactData),
       });
+      const data = await response.json()
+      console.log(data)
       if (!response.ok) throw new Error('Network response was not ok');
       alert('送信しました');
       handleClear();
@@ -49,7 +58,7 @@ export const ContactPage = () => {
     } catch (error) {
       console.error('Error submitting form:', error);
     } finally {
-      setSubmit(false);
+      setIsSubmitting(false);
     }
   }
 
